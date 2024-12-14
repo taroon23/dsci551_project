@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat DB</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="left-section">
+        <div id="db-selection">
+            <h3>Which database would you like to work with?</h3>
+            <label><input type="radio" name="dbType" value="SQL"> SQL</label>
+            <label><input type="radio" name="dbType" value="NoSQL"> NoSQL</label>
+            <button class="button" onclick="showDatasetSection()">Continue</button>
+        </div>
+        
+        <div id="nosql-section" class="hidden">
+            <h3>NoSQL Database</h3>
+            <p>Which dataset would you like to work with?</p>
+            <select id="nosql-collection-select" onchange="handleNoSQLCollectionSelection()">
+                <option value="users">Sales</option>
+                <option value="orders">Orders</option>
+                <option value="products">Products</option>
+                <option value="upload">Upload your own dataset</option>
+            </select>
+        
+            <div id="nosql-upload-section" class="hidden">
+                <form id="nosql-upload-form" enctype="multipart/form-data">
+                    <input type="file" id="nosql-file-input" name="file" accept=".csv, .json">
+                    <button type="button" onclick="uploadNoSQL()">Upload</button>
+                </form>
+            </div>
+            <button class="button" onclick="continueNoSQLSelection()">Continue</button>
+        </div>
+
+        <div id="dataset-selection" class="hidden">
+            <h3>SQL Database</h3>
+            <p>Which dataset would you like to work with?</p>
+            <select id="table-select" onchange="handleTableSelection()">
+                <option value="sales">Sales</option>
+                <option value="customers">Customers</option>
+                <option value="products">Products</option>
+                <option value="upload">Upload own table</option>
+            </select>
+
+            <div id="upload-section" class="hidden">
+                <form id="upload-form" enctype="multipart/form-data">
+                    <input type="file" id="file-input" name="file" accept=".csv">
+                    <button type="button" class="button" onclick="uploadCsv()">Upload</button>
+                </form>
+            </div>
+            <button class="button" onclick="continueTableSelection()">Continue</button>
+        </div>
+
+        <div id="query-section" class="hidden">
+            <h4>Say, would you like me to do...</h4>
+            <input type="text" id="query-input" placeholder="Enter your query here" />
+            <button class="button" onclick="processUserQuery()">Submit</button>
+            <div id="query-result"></div>
+        </div>
+
+        <div id="nosql-query-section" class="hidden">
+            <h4>Say, would you like me to do...</h4>
+            <input type="text" id="nosql-query-input" placeholder="Enter your query here" />
+            <button class="button" onclick="processNoSQLQuery()">Submit</button>
+            <div id="nosql-query-result"></div>
+        </div>
+
+    </div>
+
+    <div class="right-section">
+        <h3>Data Preview</h3>
+        <div id="data-preview" class="table-preview">
+            <p>No data selected yet.</p>
+        </div>
+    </div>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
